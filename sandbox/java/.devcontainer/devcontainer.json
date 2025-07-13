@@ -1,0 +1,22 @@
+{
+    "name": "Java",
+    "dockerComposeFile":"docker-compose.yml",
+    "service": "devcontainer",
+    "workspaceFolder": "/opt/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "fredhappyface.linuxkeybindings",
+                "vscodevim.vim",
+                "eamodio.gitlens",
+                "teabyii.ayu",
+                "vscjava.vscode-java-pack",
+                "vmware.vscode-boot-dev-pack",
+                "firsttris.vscode-jest-runner",
+                "ms-vscode.vscode-typescript-next",
+                "andys8.jest-snippets",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    }
+}

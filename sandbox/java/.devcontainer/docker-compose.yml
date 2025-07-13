@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+  vscode-data:
+  vscode-extensions:
+
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+      args:
+        - BUILDPLATFORM=linux/amd64
+    command: sleep infinity
+    volumes:
+      - ../:/opt/app:cached
+      - vscode-data:/root/.vscode-server/data:cached
+      - vscode-extensions:/root/.vscode-server/extensions:cached
+      - $HOME/.gradle/:/root/.gradle:cached
+      - $HOME/.m2:/root/.m2:cached
+      - $HOME/.ssh:/root/.ssh
+    environment:
+      - JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
