@@ -18,7 +18,7 @@
 
 ### Topic 1: Brute-force strategy
 
-- Try all possible combinations
+- Try all possible combinations (e.g. Task3)
 - Use cases: string matching, array permutations
 
 ### Topic 2: Recursion
