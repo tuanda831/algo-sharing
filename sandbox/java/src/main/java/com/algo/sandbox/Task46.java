@@ -2,7 +2,6 @@ package com.algo.sandbox;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 public class Task46 {
 
@@ -102,6 +101,61 @@ public class Task46 {
         memo.put(memoKey, result);
 
         return result;
+    }
+
+    public long dynamicProgramming(String l1, String l2) {
+        int n = l1.length();
+        final int LANE1 = 0, LANE2 = 1;
+        final int NO_SWITCH = 0, CAN_SWITCH = 1;
+
+        long[][][] dp = new long[2][n + 1][2];
+
+        dp[LANE1][n][NO_SWITCH] = 0;
+        dp[LANE1][n][CAN_SWITCH] = 0;
+        dp[LANE2][n][NO_SWITCH] = 0;
+        dp[LANE2][n][CAN_SWITCH] = 0;
+
+        for (int i = n - 1; i >= 0; i--) {
+            // Handle Lane 1 logic
+            if (l2.charAt(i) == 'x') {
+                dp[LANE1][i][NO_SWITCH] = dp[LANE1][i + 1][NO_SWITCH] + 1;
+                dp[LANE1][i][CAN_SWITCH] = Math.max(
+                        dp[LANE1][i + 1][CAN_SWITCH] + 1,
+                        dp[LANE2][i + 1][NO_SWITCH]);
+            } else {
+                dp[LANE1][i][NO_SWITCH] = dp[LANE1][i + 1][NO_SWITCH];
+                dp[LANE1][i][CAN_SWITCH] = Math.max(
+                        dp[LANE1][i + 1][CAN_SWITCH],
+                        dp[LANE2][i + 1][NO_SWITCH]
+                );
+            }
+
+            // Handle lane 2 logic
+            if (l1.charAt(i) == 'x') {
+                dp[LANE2][i][NO_SWITCH] = dp[LANE2][i + 1][NO_SWITCH] + 1;
+                dp[LANE2][i][1] = Math.max(
+                        dp[LANE2][i + 1][CAN_SWITCH] + 1,
+                        dp[LANE1][i + 1][NO_SWITCH]
+                );
+            } else {
+                dp[LANE2][i][NO_SWITCH] = dp[LANE2][i + 1][NO_SWITCH]; //switchLance = false
+                dp[LANE2][i][CAN_SWITCH] = Math.max(
+                        dp[LANE2][i + 1][CAN_SWITCH],
+                        dp[LANE1][i + 1][NO_SWITCH]
+                );
+            }
+        }
+
+        return Math.max(
+                Math.max(
+                        dp[LANE1][0][NO_SWITCH],
+                        dp[LANE1][0][CAN_SWITCH]
+                ),
+                Math.max(
+                        dp[LANE2][0][NO_SWITCH],
+                        dp[LANE2][0][CAN_SWITCH]
+                )
+        );
     }
 }
 
