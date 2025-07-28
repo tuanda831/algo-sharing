@@ -5,7 +5,8 @@ Write a function `solution` that, given a string S of length N, returns the leng
 **Examples:**
 
 1. Given S = "abaaba", the function should return 2. The shortest unique substring is "aa".
-2. Given S = "zyzyzyz", the function should return 5. The shortest unique substring is "yyyyy" (note that overlapping occurrences count as multiple occurrences).
+2. Given S = "zyzyzyz", the function should return 5. The shortest unique substring is "yzyzy". Note that there are shorter words, like 'yzy', occurrences of which overlap, but they still count as multiple occurences.
+
 3. Given S = "aabbbabaaa", the function should return 3. All substrings of length 2 occur at least twice.
 
 **Assumptions:**
